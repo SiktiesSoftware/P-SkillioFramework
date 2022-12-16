@@ -41,9 +41,15 @@
 <div align="center">
     
    ## <p align="center">The project</p>
-
+   The project consists to create an entire PHP web framework (Skilio)
+   
    ## <p align="center">Features</p>
-
+   ### Alpha 0.1
+   Base source code library for the framework.
+   Implements the routing and redirections
+   ### Alpha 0.2
+   Upgrade source code and implement more content
+    
    ## <p align="center">Elements to do</p>
 
    ## <p align="center">Contributors</p>
