@@ -1,7 +1,8 @@
 <?php
-include_once "controllers/MainController.php";
-include_once "controllers/content/IController.php";
-include_once "pages/views/View.php";
+include_once __DIR__."/../MainController.php";
+include_once __DIR__."/IController.php";
+
+include_once __DIR__."/../../pages/views/View.php";
 
 /**
  * Class alowing to access the database

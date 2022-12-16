@@ -1,9 +1,9 @@
 <?php
-include_once "controllers/content/HomeController.php";
-include_once "controllers/content/ErrorController.php";
-include_once "controllers/content/UserController.php";
-require "controllers/DEFAULT.config.php";
-require "routes/Web.php";
+include_once __DIR__."/content/HomeController.php";
+include_once __DIR__."/content/ErrorController.php";
+include_once __DIR__."/content/UserController.php";
+require __DIR__."/../.config/DEFAULT.config.php";
+require __DIR__."/../routes/Web.php";
 
 /**
  * Class alowing to access the database
@@ -109,7 +109,7 @@ class MainController
         $uri = $_SERVER["REQUEST_URI"];
         $found = false;                     // Define if the url is a created one or not (Route => Web.php)
 
-        $debug = false;
+        $debug = true;
         if ($debug) 
         {
             echo "<pre>";
@@ -119,12 +119,31 @@ class MainController
             var_dump($uri);
             echo "</pre>";
         }
+
+        $pageUrl = "";  // Definitive url of the page
+        
+        //TODO : Gestion de l'url si besoin de ?
+        //TODO : Gestion de l'url si pas bon id
+
+        /**
+         * Check if the url has get elements
+         */
+        if (str_contains($uri, "?"))
+        {
+            // Get the page url from first part of url
+            $pageUrl = explode("?", $uri)[0];
+        }
+        else
+        {
+            $pageUrl = $uri;
+        }
+
         
         // Browse all the routes by one and callback at the request url or display error
         foreach (Route::$routes as $key => $route) 
         {
             // Check if the link of actual route is as the url requested
-            if ($route->link !== $uri) continue;
+            if ($route->link !== $pageUrl) continue;
             
             // Set the url found to true and Callback
             $found = true;

@@ -1,3 +1,0 @@
-<main>
-    USER.PHP
-</main>

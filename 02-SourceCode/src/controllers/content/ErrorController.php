@@ -7,8 +7,8 @@
  *    - Class    : Manage the database input and output              
  ************************************/
 
-include_once "controllers/MainController.php";
-include_once "controllers/content/IController.php";
+include_once __DIR__."/../MainController.php";
+include_once __DIR__."/IController.php";
 
 /**
  * Class alowing to access the database

@@ -1,4 +1,5 @@
 <?php
+include_once __DIR__."/Methods.php";
 /**
  * Manage the routes
  */
@@ -6,6 +7,7 @@ class Route
 {
     public string $link, $folder, $file, $name;        // Link, folder, file and name of the route
     public array $function;                            // Function of the assigned controller
+    public Method $method;                             // method of the redirect
 
     public static array $routes;                        // Array of routes
 
@@ -17,12 +19,13 @@ class Route
      * @param file => File of the route
      * @param function => Function of the route
      */
-    private function __construct(string $link, string $folder, string $file, array $function)
+    private function __construct(string $link, string $folder, string $file, array $function, Method $method)
     {
         $this->link = $link;
         $this->folder = $folder;
         $this->file = $file;
         $this->function = $function;
+        $this->method = $method;
     }
 
     /**
@@ -35,11 +38,13 @@ class Route
      * 
      * @return Route => New route
      */
-    public static function Set(string $link, array $function, string $file, string $folder) : Route
+    public static function Set(string $link, array $function, string $file, $folder, Method $method) : Route
     {
-        $route = new Route($link, $file, $folder, $function);
+        // Set a new route and add them to the array
+        $route = new Route($link, $file, $folder, $function, $method);
         Route::$routes[] = $route;
 
+        // return the actual route
         return $route;
     }
 
