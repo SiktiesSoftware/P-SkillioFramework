@@ -1,3 +1,0 @@
-<main>
-    CONTACT.PHP
-</main>
