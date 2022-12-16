@@ -1,5 +1,5 @@
 <div align="center">
-    <h1>ProjectTemplate</h1>
+    <h1>Skilio Web Framework</h1>
     <i>Hi, welcome to my project, hope you will like it !</i> <br />
     <b> > ENJOY < </b>
 </div>
