@@ -2,7 +2,7 @@
 
 namespace app\core;
 
-class Error
+class Component
 {
 
 }
