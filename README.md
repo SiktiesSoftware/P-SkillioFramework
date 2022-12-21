@@ -44,13 +44,49 @@
    The project consists to create an entire PHP web framework (Skilio)
    
    ## <p align="center">Features</p>
-   ### Alpha 0.1
+   ### **ALPHA 0.1**
    Base source code library for the framework.
    Implements the routing and redirections
-   ### Alpha 0.2
+   ### **ALPHA 0.2**
    Upgrade source code and implement more content
-    
+   ### **ALPHA 1.0**
+   **Patch note**
+   <br> ********* <br>
+   **SOURCES REWORK** <br>
+   -- <br>
+   Complete rework of the code. Creating a core folder which contains all the base classes to automatically redirect and set the parameters in back-end.
+   <br> ********* <br>
+   **COMPONENT** <br>
+   -- <br>
+   Create a new view usefull element : Component
+   The components can be created by you in the component folder, with the ".component.php" extension and can be used in a view of your choice. It permits the creation of separated content for the view. <br>
+   Exemple : Create a "card" using css to display a user which can be reusable in differents views with the same appearance.
+   A component can accept datas from the view with an array and use the array variable `$componentValues` into the card with the key you created before.
+   Simple to use :
+   Set a component : `<?php echo Component::Set("fileName"/*Without extension*/, ["datas" => "data"]) ?>`
+   Display datas into the component : `<?= $componentValues["datas"] ?>` <br>
+   The components can be used with loops and conditions too (in and out the component)
+   Exemple of loop:
+</div>
 
+   >
+        foreach ($users as $key => $user) 
+        {
+            echo Component::Set("User", ["user" => $user]);
+        }
+        
+<div align="center">
+
+   <br> ********* <br>
+   **Errors** <br>
+   -- <br>
+   Errors corrections for the redirect
+   Errors corrections for the native css not found
+   <br> ********* <br>
+   **Demo** <br>
+   -- <br>
+   Adding a basic database script and some base pages for a mini demo
+   
    ## <p align="center">Elements to do</p>
 
    ## <p align="center">Contributors</p>
