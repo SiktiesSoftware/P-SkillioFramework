@@ -1,0 +1,12 @@
+.userCard
+{
+    color: aquamarine;
+    border: orange;
+    border-width: 3px;
+    border-style: solid;
+}
+
+body
+{
+    color: brown;
+}

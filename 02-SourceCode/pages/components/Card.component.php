@@ -1,0 +1,2 @@
+Component
+<?= $componentValues[0]; ?>
