@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__."/../../core/Controller.php";
+include_once __DIR__."/../../core/Lang.php";
 
 /**
  * Manage home pages
@@ -13,8 +14,19 @@ class HomeController extends Controller
      */
     public function Home()
     {
-        // Return a simple view
-        return View::Get($this->folder, $this->file);
+        // Return the content of a page ===> INCLUDE THE COMPONENTS INTO THE PAGE
+        $homeTranslations = Lang::GetTranslations("home");
+
+        // Get the view
+        $view = View::Get($this->folder, $this->file);
+
+        // Replace variables
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        // Return the content of the page + variables set
+        return $content;
     }
 
     /**
