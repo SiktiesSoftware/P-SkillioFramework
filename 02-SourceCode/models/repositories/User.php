@@ -1,10 +1,10 @@
 <?php
-class User
+include_once __DIR__."/../../core/Account.php";
+class User extends Account
 {
-    public int $id;                 // Id of the user
-    public string $nickname;        // Nickname of the user
-    public string $password;        // Password of the user (HASH)
-    
+    public int $id;                                   // Id of the user
+    public string $nickname, $password, $role;        // Nickname, Password (HASH), role of the user
+
     /**
      * User class constructor
      * 
@@ -12,11 +12,12 @@ class User
      * @param nickname => Nickname of the user
      * @param password => Password of the user
      */
-    public function __construct(int $id, string $nickname, $password)
+    public function __construct(int $id, string $nickname, $password, $role)
     {
         $this->id = $id;
         $this->nickname = $nickname;
         $this->password = $password;
+        $this->role = $role;
     }
 
     /**

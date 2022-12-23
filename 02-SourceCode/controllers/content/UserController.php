@@ -2,6 +2,7 @@
 include_once __DIR__."/../../core/Controller.php";
 include_once __DIR__."/../../models/tables/t_user.php";
 include_once __DIR__."/../../models/repositories/User.php";
+include_once __DIR__."/../../core/Account.php";
 
 class UserController extends Controller
 {
@@ -21,7 +22,7 @@ class UserController extends Controller
         // Browse array to set objects of users
         foreach ($usersArray as $key => $actualUser) 
         {
-            $user = new User($actualUser["idUser"], $actualUser["nickname"], $actualUser["password"]);
+            $user = new User($actualUser["idUser"], $actualUser["nickname"], $actualUser["password"], $actualUser["role"]);
             $users[] = $user;
         }
 
@@ -46,7 +47,7 @@ class UserController extends Controller
     {
         // Get the user by id
         $userArray = t_user::GetUserByIdUser($_GET["id"]);
-        $user = new User($userArray["idUser"], $userArray["nickname"], $userArray["password"]);
+        $user = new User($userArray["idUser"], $userArray["nickname"], $userArray["password"], $userArray["role"]);
 
         // Get the view
         $view = View::Get($this->folder, $this->file);
