@@ -5,6 +5,8 @@ class Route
     public array $function;                                     // Function of the assigned controller
 
     public static array $routes;                                // Array of routes
+    public static array $groups;                                // Array of groups
+    public static array $middlewares;                           // Array of middlewares
 
     /**
      * Route class constructor
@@ -65,11 +67,32 @@ class Route
     }
 
     /**
+     * Set a group of few routes
+     * 
+     * @param routes => Routes entered on the group
+     */
+    public static function Group(array $routes)
+    {
+        // Set a new group and add them to the array
+    }
+
+    /**
+     * Set a middleware of few routes
+     * 
+     * @param file => File name of the selected middleware
+     * @param routes => Routes entered on the middleware
+     */
+    public static function Middleware(string $file, array $routes)
+    {
+
+    }
+
+    /**
      * Set the name of the route
      * 
      * @param name => name of the route
      */
-    public function Name($name)
+    public function Name(string $name)
     {
         $this->name = $name;
     }
@@ -80,7 +103,7 @@ class Route
      * @param name => name of the route
      * @return Route => Route requested
      */
-    public static function GetRouteByName($name)
+    public static function GetRouteByName(string $name)
     {
         // Browse all routes by one and return the one who has the same name
         foreach (Route::$routes as $key => $route) 

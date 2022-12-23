@@ -48,6 +48,20 @@ class Web
             'users', 'User.php'
             )->Name('user');
 
+
+        // Connection inscription group
+        Route::Group([
+            Route::Post('/connection', 
+                [UserController::class, 'CConnection'],
+                'account', 'Connection.php'
+                )->Name('connection'),
+            Route::Post('/inscription', 
+                [UserController::class, 'Inscription'],
+                'account', 'Inscription.php'
+                )->Name('inscription')
+        ]);
+
+
         /**
          * Errors
          */
