@@ -46,7 +46,6 @@ class UserController extends Controller
     {
         // Get the user by id
         $userArray = t_user::GetUserByIdUser($_GET["id"]);
-        var_dump($userArray);
         $user = new User($userArray["idUser"], $userArray["nickname"], $userArray["password"]);
 
         // Get the view

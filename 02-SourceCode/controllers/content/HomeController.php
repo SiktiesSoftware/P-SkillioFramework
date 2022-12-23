@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__."/../../core/Controller.php";
-include_once __DIR__."/../../core/Lang.php";
+include_once __DIR__."/../../core/languages/Lang.php";
 
 /**
  * Manage home pages

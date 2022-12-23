@@ -2,9 +2,9 @@
 class Route
 {
     public string $link, $folder, $file, $name, $method;        // Link, folder, file and name of the route
-    public array $function;                            // Function of the assigned controller
+    public array $function;                                     // Function of the assigned controller
 
-    public static array $routes;                       // Array of routes
+    public static array $routes;                                // Array of routes
 
     /**
      * Route class constructor

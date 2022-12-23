@@ -1,7 +1,8 @@
-<?php include_once __DIR__."/../../core/Lang.php"; ?>
-
+<?php 
+include_once __DIR__."/../../core/languages/Lang.php"; 
+?>
 <!DOCTYPE html>
-<html lang="<?= Lang::GetActualLanguage(); ?>">
+<html lang="<?= $_SESSION["lang"] ?>">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
