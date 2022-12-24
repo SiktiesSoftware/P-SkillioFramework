@@ -1,6 +1,6 @@
 <?php
 return
 [
-    "lang" => "fr"
+    "lang" => "fr",
 ];
 ?>

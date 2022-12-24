@@ -3,6 +3,9 @@ include_once __DIR__."/../controllers/content/ErrorController.php";
 include_once __DIR__."/../controllers/content/HomeController.php";
 include_once __DIR__."/../controllers/content/UserController.php";
 
+/**
+ * 
+ */
 class Controller
 {
     protected string $folder, $file;      // Folder and file of the page to display
@@ -25,5 +28,4 @@ class Controller
         return call_user_func(array($controller, $callable));
     }
 }
-
 ?>

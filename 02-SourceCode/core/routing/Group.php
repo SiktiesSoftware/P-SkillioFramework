@@ -1,17 +1,12 @@
 <?php
-class Group
+include_once __DIR__."/Base.php";
+/**
+ * Manage group redirections
+ * 
+ * @extends Base => Base redirection managing groups
+ */
+class Group extends Base
 {
-    public string $name;
 
-    public function __construct()
-    {
-        
-    }
-
-    public function Name(string $name) : Group
-    {
-        $this->name = $name;
-        return $this;
-    }
 }
 ?>

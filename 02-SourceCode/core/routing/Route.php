@@ -1,4 +1,6 @@
 <?php
+include_once __DIR__."/Group.php";
+include_once __DIR__."/Middleware.php";
 class Route
 {
     public string $link, $folder, $file, $name, $method;        // Link, folder, file and name of the route
@@ -70,21 +72,45 @@ class Route
      * Set a group of few routes
      * 
      * @param routes => Routes entered on the group
+     * @param controller => Controller of the group
+     * 
+     * @return Group => Group created
      */
-    public static function Group(array $routes)
+    public static function Group($controller, array $routes) : Group
     {
-        // Set a new group and add them to the array
+        // Set the controller of the group to the routes
+        foreach ($routes as $key => $route)
+        {
+            $routes[$key]->function["controller"] = $controller;
+        }
+
+        // Set a new group and add them to the array + return them
+        $group = new Group($routes);
+        Route::$groups[] = $group;
+        return $group;
     }
 
     /**
      * Set a middleware of few routes
      * 
+     * @param controller => Controller of the middleware
      * @param file => File name of the selected middleware
      * @param routes => Routes entered on the middleware
+     * 
+     * @return Middleware => Middleware created
      */
-    public static function Middleware(string $file, array $routes)
+    public static function Middleware($controller, array $function, $routes) : Middleware
     {
+        // Set the controller of the group to the routes
+        foreach ($routes as $key => $route)
+        {
+            $routes[$key]->function["controller"] = $controller;
+        }
 
+        // Set a new group and add them to the array
+        $middleware = new Middleware($routes, $function, $controller);
+        Route::$middlewares[] = $middleware;
+        return $middleware;
     }
 
     /**
@@ -101,6 +127,7 @@ class Route
      * Get a route by his name
      * 
      * @param name => name of the route
+     * 
      * @return Route => Route requested
      */
     public static function GetRouteByName(string $name)
@@ -113,6 +140,46 @@ class Route
 
             // Return the route
             return $route;
+        }
+    }
+
+    /**
+     * Get a group by his name
+     * 
+     * @param name => name of the route
+     * 
+     * @return Group => Group requested
+     */
+    public static function GetGroupByName(string $name) : Group
+    {
+        // Browse all routes by one and return the one who has the same name
+        foreach (Route::$groups as $key => $group) 
+        {
+            // Check if the actual route has the same name that entered
+            if ($group->name !== $name) continue;
+
+            // Return the route
+            return $group;
+        }
+    }
+
+    /**
+     * Get a middleware by his name
+     * 
+     * @param name => name of the route
+     * 
+     * @return Group => Group requested
+     */
+    public static function GetMiddlewareByName(string $name) : Middleware
+    {
+        // Browse all routes by one and return the one who has the same name
+        foreach (Route::$middlewares as $key => $middleware) 
+        {
+            // Check if the actual route has the same name that entered
+            if ($middleware->name !== $name) continue;
+
+            // Return the route
+            return $middleware;
         }
     }
 }

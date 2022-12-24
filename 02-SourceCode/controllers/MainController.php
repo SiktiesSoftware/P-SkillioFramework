@@ -4,8 +4,12 @@ include_once __DIR__."/../core/Controller.php";
 include_once __DIR__."/content/ErrorController.php";
 include_once __DIR__."/content/HomeController.php";
 include_once __DIR__."/content/UserController.php";
+include_once __DIR__."/content/AccountController.php";
 include_once __DIR__."/../core/Component.php";
 
+/**
+ * manage the display of the pages and manage the controllers
+ */
 class MainController
 {
     protected string $views = "pages/views/";       // Folder of the views
@@ -45,6 +49,7 @@ class MainController
      * Get a controller
      * 
      * @param controller => Controller class
+     * 
      * @return link => Controller object
      */
     private function GetController($controller)
@@ -60,6 +65,9 @@ class MainController
                 break;
             case ErrorController::class:
                 $link = new ErrorController();
+                break;
+            case AccountController::class:
+                $link = new AccountController();
                 break;
             default:
                 $link = null;
