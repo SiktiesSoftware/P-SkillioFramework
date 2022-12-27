@@ -49,6 +49,8 @@ class Application
         Web::Groups();
         Web::Middlewares();
 
+        $this->Login(1);
+
         // Get the url
         $url = Request::GetUrl();
         $this->route = Request::GetRoute($url);
@@ -87,9 +89,9 @@ class Application
     /**
      * Login to the user
      */
-    public function Login()
+    public function Login(int $userId)
     {
-        
+
     }
 
     /**
@@ -97,7 +99,7 @@ class Application
      */
     public function Logout()
     {
-        
+
     }
 }
 

@@ -4,7 +4,7 @@ include_once __DIR__."/../../core/database/Database.php";
 
 class t_user extends TableModel
 {
-        /**
+    /**
      * Get a specific user
      * 
      * @param id => Id of the user
@@ -32,13 +32,13 @@ class t_user extends TableModel
     public static function GetAll() : array
     {
         // Get all the users
-        $usersArray = Database::GetInstance()->QuerySimpleExecute
+        $session = Database::GetInstance()->QuerySimpleExecute
         (
-            "SELECT * FROM t_user"
+            "SELECT * FROM t_session"
         );
         
         // Return users
-        return $usersArray;
+        return $session;
     }
 }
 

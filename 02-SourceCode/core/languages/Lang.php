@@ -4,7 +4,7 @@
  */
 class Lang
 {
-    public static array $languages = ["fr", "en"];
+    public static array $languages = ["fr", "en"];  // Languages of the website
 
     /**
      * Get the translations

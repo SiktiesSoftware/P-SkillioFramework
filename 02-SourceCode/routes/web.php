@@ -119,6 +119,7 @@ class Web
     {
         Route::Middleware(UserController::class,
         [
+            // Middleware class
             Auth::class => 
             [
                 "IsConnected" => [],

@@ -19,6 +19,13 @@ class Auth
      */
     public static function HasPermission() : array
     {
+
+        // Check if the datas aren't null
+        if(!is_null(Middleware::$datas))
+        {
+            
+        }   
+
         //return ["hasAccess" => true];
         return ["hasAccess" => false, "Request" => Route::GetRouteByName("403")];
     }

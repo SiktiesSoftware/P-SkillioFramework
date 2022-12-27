@@ -4,6 +4,8 @@
  */
 class Account
 {
+    public User $user;                                          // Actual user of the connected account
+    
     /**
      * Define if the user has some role or not
      */

@@ -2,7 +2,7 @@
 /**
  * Manage the session global variable
  */
-class Session
+class SessionStart
 {
     /**
      * Set the base session with the config session file

@@ -45,13 +45,13 @@ class Middleware extends Base
 
                 // Call the actual middleware
                 $access = call_user_func(array($class, $function));
+                self::$datas = null;
 
+                
                 // Check if the previous middleware is successful and continue or break the loop
                 if ($access["hasAccess"]) continue;
                 break;
             }
-
-
         }
 
         // Return the access
