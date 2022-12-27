@@ -32,13 +32,13 @@ class t_user extends TableModel
     public static function GetAll() : array
     {
         // Get all the users
-        $session = Database::GetInstance()->QuerySimpleExecute
+        $user = Database::GetInstance()->QuerySimpleExecute
         (
-            "SELECT * FROM t_session"
+            "SELECT * FROM t_user"
         );
         
         // Return users
-        return $session;
+        return $user;
     }
 }
 
