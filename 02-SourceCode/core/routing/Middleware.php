@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__."/Base.php";
+include_once __DIR__."/../../middlewares/Auth.php";
 /**
  * Manage middleware group redirections
  * 
@@ -7,19 +8,22 @@ include_once __DIR__."/Base.php";
  */
 class Middleware extends Base
 {
-    public array $functions;            // Array of function to verify in middlewares
+    public array $content;            // Array of function to verify in middlewares
+    public $controller;               // Controller of the group
+    public static $datas;             // Actual datas for the function
 
     /**
      * Middleware class constructor
      * 
      * @param routes => Routes associated to the middleware
-     * @param functions => Array of function which must be executed and successful before redirection
+     * @param content => Array of content which must be executed and successful before redirection
      * @param controller => Controller of the page
      */
-    public function __construct(array $routes, $functions, $controller)
+    public function __construct(array $routes, $content, $controller)
     {
-        $this->function = $functions;
-        var_dump($this->functions);
+        // Set the content and call parent
+        $this->content = $content;
+        $this->controller = $controller;
         Parent::__construct($routes);
     }
 
@@ -28,22 +32,30 @@ class Middleware extends Base
      * 
      * @return bool => Define if the user has access to the resource
      */
-    public function Exec() : bool
+    public function Exec() : array
     {
-        echo "<pre>";
-        var_dump($this);
-        echo "</pre>";
-        die;
         // Get one by one all the class and function of different middlewares
-        foreach ($this->functions as $class => $function) 
+        foreach ($this->content as $class => $functions) 
         {
-            // Call the actual middleware
-            $hasAccess = call_user_func(array($class, $function));
+            // Get each of the functions and datas for the middleware
+            foreach ($functions as $function => $datas)
+            {
+                // Set the datas
+                self::$datas = $datas;
 
-            // Check if the previous middleware is successful and continue or break the loop
-            if ($hasAccess) continue;
-            return $hasAccess;
+                // Call the actual middleware
+                $access = call_user_func(array($class, $function));
+
+                // Check if the previous middleware is successful and continue or break the loop
+                if ($access["hasAccess"]) continue;
+                break;
+            }
+
+
         }
+
+        // Return the access
+        return $access;
     }
 }
 ?>

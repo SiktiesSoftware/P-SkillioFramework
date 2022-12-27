@@ -6,7 +6,6 @@ include_once __DIR__."/Request.php";
 
 class Application
 {
-    private bool $hasAccess;                       // Define if the user has access to the resource
     private MainController $mainController;        // Main controller object
     private static Application $instance;          // Instance of the application
     private Route $route;                          // Actual route 
@@ -67,7 +66,15 @@ class Application
                     if ($route != $this->route) continue;
 
                     // Execute the middlewares
-                    $hasAccess = $middleware->Exec();
+                    $access = $middleware->Exec();
+
+                    // Check if the middleware is successful
+                    if ($access["hasAccess"] == false) 
+                    {
+                        // Set the route to another set in the middleware
+                        $this->route = $access["Request"];
+                        header("location: /projects/P-SkilioFramework/02-SourceCode".$this->route->link);
+                    }
                     break;
                 }
             }

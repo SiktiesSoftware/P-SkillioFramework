@@ -1,5 +1,5 @@
 <main>
-    404 error
+    403 error
     <?php
 
     echo Component::Set("card", ["test"]); 

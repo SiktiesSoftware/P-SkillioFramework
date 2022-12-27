@@ -1,14 +1,26 @@
 <?php
 class Auth
 {
-    public function IsConnected() : bool
+    /**
+     * Check if the user is connected
+     * 
+     * @return array => Array of redirection
+     */
+    public static function IsConnected() : array
     {
-        return true;
+        return ["hasAccess" => true];        
+        //return ["hasAccess" => false, "Request" => Route::GetRouteByName("404")];
     }
 
-    public function HasPermission() : bool
+    /**
+     * Check if the user has the permission to access this resource
+     * 
+     * @return array => Array of redirection
+     */
+    public static function HasPermission() : array
     {
-        return false;
+        //return ["hasAccess" => true];
+        return ["hasAccess" => false, "Request" => Route::GetRouteByName("403")];
     }
 }
 ?>

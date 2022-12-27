@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__."/../core/routing/Route.php";
+include_once __DIR__."/../core/routing/Route.php";
 
 /**
  * manage the routes creations
@@ -8,6 +9,15 @@ class Web
 {
     /**
      * Set all the routes created
+     * 
+     * ROUTE => home
+     * ROUTE => contact
+     * ROUTE => users
+     * ROUTE => user
+     * ROUTE => connection
+     * ROUTE => inscription
+     * ROUTE => E403
+     * ROUTE => E404
      */
     public static function Routes()
     {
@@ -66,13 +76,22 @@ class Web
          */
         // 404 page
         Route::Post('/404', 
-            ["controller" => ErrorController::class, "function" => 'E404'],
+            ["function" => 'E404'],
             'errors', '404.php'
             )->Name('404');
+
+        // 403 page
+        Route::Post('/403', 
+            ["function" => 'E403'],
+            'errors', '403.php'
+            )->Name('403');
     }
 
     /**
      * Set the groups
+     * 
+     * GROUP => Account
+     * GROUP => Error
      */
     public static function Groups()
     {
@@ -82,17 +101,32 @@ class Web
             Route::GetRouteByName("connection"),
             Route::GetRouteByName("inscription")
         ])->Name("Account");
+
+        // Error group
+        Route::Group(ErrorController::class,
+        [
+            Route::GetRouteByName("403"),
+            Route::GetRouteByName("404")
+        ])->Name("Error");
     }
 
     /**
      * Set all the middlewares
+     * 
+     * MIDDLEWARE => Users
      */
     public static function Middlewares()
     {
         Route::Middleware(UserController::class,
         [
-            Auth::class => "IsConnected",
-            Auth::class => "HasPermission"
+            Auth::class => 
+            [
+                "IsConnected" => [],
+                "HasPermission" =>
+                [
+                    "Roles" => ["admin"]
+                ]
+            ],
         ],
         [
             Route::GetRouteByName("users"),
