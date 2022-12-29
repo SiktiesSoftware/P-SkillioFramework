@@ -10,10 +10,11 @@ class View
      * @param folder => folder of the view
      * @param file => file of the view
      * 
-     * @return pageContent => Content of a page
+     * @return string => Content of a page
      */
-    public static function Get(string $folder, string $file)
+    public static function Get(string $folder, string $file) : string
     {
+        // Return the content of a view
         return file_get_contents(__DIR__."/../pages/views/".$folder."/".$file);
     }
 }

@@ -1,5 +1,8 @@
 <?php
-class RepositoryModel
+/**
+ * Manage the repositories for the db
+ */
+abstract class RepositoryModel
 {
 
 }

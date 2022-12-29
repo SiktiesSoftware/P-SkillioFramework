@@ -1,13 +1,15 @@
 <?php
+// Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') 
 {
-    if (isset($_POST["lang"])) 
-    {
-      //die($_POST["lang"]);
-        $_SESSION["lang"] = $_POST["lang"];
-        //die("ss".$_SESSION["lang"]);
-        header("refresh: 0");
-    }
+  // Check if the lang is set
+  if (isset($_POST["lang"])) 
+  {
+    //die($_POST["lang"]);
+      $_SESSION["lang"] = $_POST["lang"];
+      //die("ss".$_SESSION["lang"]);
+      header("refresh: 0");
+  }
 }
 ?>
 

@@ -1,4 +1,5 @@
 <?php
+// Return the french language translations
 return
 [
     "title" => "Accueil",

@@ -4,7 +4,7 @@ include_once __DIR__."/../../middlewares/Auth.php";
 /**
  * Manage middleware group redirections
  * 
- * @extends Base => Base redirection managing groups
+ * @package Base => Base redirection managing groups
  */
 class Middleware extends Base
 {
@@ -30,7 +30,7 @@ class Middleware extends Base
     /**
      * Execute the middlewares one by one
      * 
-     * @return bool => Define if the user has access to the resource
+     * @return array => Define if the user has access to the resource
      */
     public function Exec() : array
     {

@@ -1,6 +1,5 @@
 <?php
 include_once __DIR__."/../core/Controller.php";
-
 include_once __DIR__."/content/ErrorController.php";
 include_once __DIR__."/content/HomeController.php";
 include_once __DIR__."/content/UserController.php";
@@ -31,13 +30,13 @@ class MainController
         // Check if the controller is set or no
         if (!isset($controller)) 
         {
-            // $defaultRoute = DefaultRoute();
-            // $controller = $defaultRoute["controller"];
-            // $callable = $defaultRoute["callable"];
-            // $link = $defaultRoute["link"];
-            // $folder = $defaultRoute["folder"];
-            // $file = $defaultRoute["file"];
-            // $name = $defaultRoute["name"];
+            $defaultRoute = include(__DIR__."/../.config/defaultRoute.config.php");
+            $controller = $defaultRoute["controller"];
+            $callable = $defaultRoute["callable"];
+            $link = $defaultRoute["link"];
+            $folder = $defaultRoute["folder"];
+            $file = $defaultRoute["file"];
+            $name = $defaultRoute["name"];
         }
 
         // Get the controller and display page
@@ -90,18 +89,25 @@ class MainController
     {
         // Get the content from the current controller
         $content = Controller::Display($callable, $folder, $file, $currentController);
-        
-        // Display page
-        if (get_class($currentController) == 'DownloadController') 
+
+        // Include the head
+        include(dirname(__FILE__) . '/../pages/includes/head.php');
+
+        // Check if an error occured or not and display the page
+        if ($currentController::class == ErrorController::class) 
         {
+            // Display the page content
             echo $content;
         } 
         else 
         {
-            include(dirname(__FILE__) . '/../pages/includes/head.php');
+            // Include the header
             include(dirname(__FILE__) . '/../pages/includes/header.php');
+            // Include the navigation
             include(dirname(__FILE__) . '/../pages/includes/nav.php');
+            // Display the page content
             echo $content;
+            // Include the footer
             include(dirname(__FILE__) . '/../pages/includes/footer.php');
         }
     }

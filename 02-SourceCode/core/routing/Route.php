@@ -1,6 +1,10 @@
 <?php
 include_once __DIR__."/Group.php";
 include_once __DIR__."/Middleware.php";
+
+/**
+ * Manage the routes
+ */
 class Route
 {
     public string $link, $folder, $file, $name, $method;        // Link, folder, file and name of the route
@@ -118,7 +122,7 @@ class Route
      * 
      * @param name => name of the route
      */
-    public function Name(string $name)
+    public function Name(string $name) : void
     {
         $this->name = $name;
     }
@@ -130,7 +134,7 @@ class Route
      * 
      * @return Route => Route requested
      */
-    public static function GetRouteByName(string $name)
+    public static function GetRouteByName(string $name) : Route
     {
         // Browse all routes by one and return the one who has the same name
         foreach (Route::$routes as $key => $route) 

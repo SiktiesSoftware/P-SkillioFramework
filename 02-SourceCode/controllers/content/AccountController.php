@@ -2,6 +2,9 @@
 include_once __DIR__."/../../core/Controller.php";
 include_once __DIR__."/../../core/View.php";
 
+/**
+ * Manage account pages
+ */
 class AccountController extends Controller
 {
     /**

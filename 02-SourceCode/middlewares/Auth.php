@@ -1,4 +1,7 @@
 <?php
+/**
+ * Manage the verifications of the authentification when called
+ */
 class Auth
 {
     /**
@@ -8,6 +11,7 @@ class Auth
      */
     public static function IsConnected() : array
     {
+        // Return the access
         return ["hasAccess" => true];        
         //return ["hasAccess" => false, "Request" => Route::GetRouteByName("404")];
     }
@@ -20,8 +24,8 @@ class Auth
     public static function HasPermission() : array
     {
         /** Get the role of the user */
-        //$userRole = "admin";
-        $userRole = "user";
+        $userRole = "admin";
+        //$userRole = "user";
 
         // Check if the datas aren't null
         if(!is_null(Middleware::$datas))

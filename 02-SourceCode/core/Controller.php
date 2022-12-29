@@ -4,11 +4,13 @@ include_once __DIR__."/../controllers/content/HomeController.php";
 include_once __DIR__."/../controllers/content/UserController.php";
 
 /**
+ * Manage the controllers base
  * 
+ * Define which controller must be called
  */
 class Controller
 {
-    public static array $permissions;                   // Permissions to access some page
+    public static array $permissions;     // Permissions to access some page
     protected string $folder, $file;      // Folder and file of the page to display
 
     /**

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Manage the requests of the user
+ * 
+ * Define which route was called and redirect to the current page
+ */
 class Request
 {
     /**
@@ -14,9 +19,9 @@ class Request
     /**
      * Get the url of the server request uri
      * 
-     * @return pageUri => Url of the request uri
+     * @return string => Url of the request uri
      */
-    public static function GetUrl()
+    public static function GetUrl() : string
     {
         // Get the url request
         $url = $_SERVER["REQUEST_URI"];
@@ -37,12 +42,12 @@ class Request
      * Get the route selected by the url
      * 
      * @param url => url of the request
-     * @return route => Actual route
+     * @return ?Route => Actual route
      */
-    public static function GetRoute($url) : Route
+    public static function GetRoute($url) : ?Route
     {
         // Set the CSS return
-        $uri = str_replace("/projects/P-SkilioFramework/02-SourceCode", " ", $url);
+        $uri = str_replace("/", " ", $url);
         $cssReturns = substr_count($uri, "/") - 1;
         for ($i = 0; $i < $cssReturns; $i++) 
         { 
@@ -54,10 +59,8 @@ class Request
         // Browse all the routes by one and callback at the request url or display error
         foreach (Route::$routes as $key => $route) 
         {
-            
             // Check if the link of actual route is as the url requested
-            if ("/projects/P-SkilioFramework/02-SourceCode".$route->link !== $url) continue;
-
+            if ($route->link !== $url) continue;
 
             // Return the route and set the found variable to true
             $found = true;
@@ -68,7 +71,7 @@ class Request
         if (!$found) 
         {
             // Return 404 error
-            return Route::GetRouteByName("404");
+            header("location: ".Route::GetRouteByName("404")->link);
         }
 
     }

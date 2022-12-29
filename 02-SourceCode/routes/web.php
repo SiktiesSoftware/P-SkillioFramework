@@ -61,12 +61,12 @@ class Web
         /**
          * Account
          */
-        Route::Post('/connection', 
+        Route::Post('/account/connection', 
             ["function" => 'Connection'],
             'account', 'Connection.php'
             )->Name('connection');
 
-        Route::Post('/inscription', 
+        Route::Post('/account/inscription', 
             ["function" => 'Inscription'],
             'account', 'Inscription.php'
             )->Name('inscription');

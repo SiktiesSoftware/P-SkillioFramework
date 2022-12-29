@@ -2,6 +2,11 @@
 include_once __DIR__."/../../core/database/TableModel.php";
 include_once __DIR__."/../../core/database/Database.php";
 
+/**
+ * Manage the user table in Db
+ * 
+ * @package TableModel => Base model of the table
+ */
 class t_user extends TableModel
 {
     /**

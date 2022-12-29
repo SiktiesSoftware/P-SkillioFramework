@@ -2,8 +2,10 @@
 include_once __DIR__."/../../core/Controller.php";
 include_once __DIR__."/../../models/tables/t_user.php";
 include_once __DIR__."/../../models/repositories/User.php";
-include_once __DIR__."/../../core/Account.php";
 
+/**
+ * Manage the user pages
+ */
 class UserController extends Controller
 {
     /**

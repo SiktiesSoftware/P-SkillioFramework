@@ -10,9 +10,9 @@ class Component
      * @param file => file of the component
      * @param values => values to send to the component
      * 
-     * @return content => Content of a component
+     * @return string => Content of a component
      */
-    public static function Set(string $file, array $values)
+    public static function Set(string $file, array $values) : string
     {
         // Set the values
         $componentValues = $values;
@@ -33,9 +33,12 @@ class Component
      * Get content of the file component
      * 
      * @param file => Name of the file
+     * 
+     * @return string => Content of a component
      */
-    private static function Get(string $file)
+    private static function Get(string $file) : string
     {
+        // return the content
         return file_get_contents(__DIR__."/../pages/components/".$file.".component.php");
     }
 }

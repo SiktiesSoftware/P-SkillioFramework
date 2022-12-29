@@ -1,4 +1,5 @@
 <?php
+// Return the english language translations
 return
 [
     "title" => "Home",

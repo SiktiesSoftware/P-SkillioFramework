@@ -1,13 +1,13 @@
 <?php
 /**
- * Manage the session global variable
+ * Manage the session global variables
  */
 class SessionStart
 {
     /**
      * Set the base session with the config session file
      */
-    public static function SetSession()
+    public static function SetSession() : void
     {
         // Check if the session global variable is set
         if (is_null($_SESSION) || !isset($_SESSION) || count($_SESSION) == 0) 

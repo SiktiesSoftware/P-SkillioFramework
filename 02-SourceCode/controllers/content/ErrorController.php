@@ -2,6 +2,9 @@
 include_once __DIR__."/../../core/Controller.php";
 include_once __DIR__."/../../core/View.php";
 
+/**
+ * Manage error pages
+ */
 class ErrorController extends Controller
 {
     /**

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Manage the database interactions
+ */
 class Database
 {
     private static Database $instance;           // Database instance

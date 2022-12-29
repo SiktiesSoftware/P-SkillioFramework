@@ -4,6 +4,9 @@ include_once __DIR__."/routing/Middleware.php";
 include_once __DIR__."/../routes/web.php";
 include_once __DIR__."/Request.php";
 
+/**
+ * Manage the application routing, redirect, etc...
+ */
 class Application
 {
     private MainController $mainController;        // Main controller object
@@ -22,9 +25,9 @@ class Application
     /**
      * Get the instance of the application
      * 
-     * @return application => Current application instance
+     * @return Application => Current application instance
      */
-    public static function GetInstance()
+    public static function GetInstance() : Application
     {
         /**
          * Check if the instance of the application is set
@@ -42,14 +45,12 @@ class Application
     /**
      * Run the routes and get the requested url
      */
-    public function Run()
+    public function Run() : void
     {
         // Set the routes, groups and middlewares
         Web::Routes();
         Web::Groups();
         Web::Middlewares();
-
-        $this->Login(1);
 
         // Get the url
         $url = Request::GetUrl();
@@ -75,7 +76,7 @@ class Application
                     {
                         // Set the route to another set in the middleware
                         $this->route = $access["Request"];
-                        header("location: /projects/P-SkilioFramework/02-SourceCode".$this->route->link);
+                        header("location: ".$this->route->link);
                     }
                     break;
                 }
@@ -84,22 +85,6 @@ class Application
 
         // Dispatch functions
         $this->mainController->Dispatch($this->route->function["controller"], $this->route->function["function"], $this->route->link, $this->route->folder, $this->route->file, $this->route->name);
-    }
-
-    /**
-     * Login to the user
-     */
-    public function Login(int $userId)
-    {
-
-    }
-
-    /**
-     * Logout to the user
-     */
-    public function Logout()
-    {
-
     }
 }
 
