@@ -57,8 +57,6 @@ class Application
         $url = Request::GetUrl();
         $this->route = Request::GetRoute($url);
 
-        $_POST["test"] = "toto";
-
         // Check if the route link contains "/verify"
         if (str_contains($this->route->link, "/verify")) 
         {
