@@ -51,10 +51,23 @@ class Application
         Web::Routes();
         Web::Groups();
         Web::Middlewares();
+        Web::Verifications();
 
         // Get the url
         $url = Request::GetUrl();
         $this->route = Request::GetRoute($url);
+
+        $_POST["test"] = "toto";
+
+        // Check if the route link contains "/verify"
+        if (str_contains($this->route->link, "/verify")) 
+        {
+            // Check if the post variable is set
+            if (!isset($_POST) || count($_POST) <= 0) 
+            {
+                header("location: ".Route::GetRouteByName("home")->link);
+            }
+        }
 
         // Check if a middleware needs to be called
         if (isset(Route::$middlewares)) 
@@ -82,7 +95,6 @@ class Application
                 }
             }
         }
-
         // Dispatch functions
         $this->mainController->Dispatch($this->route->function["controller"], $this->route->function["function"], $this->route->link, $this->route->folder, $this->route->file, $this->route->name);
     }

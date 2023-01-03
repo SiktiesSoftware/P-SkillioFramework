@@ -6,4 +6,5 @@
     <a href=<?= Route::GetMiddlewareByName("users")->GetRoute("users")->link ?>>users</a>  <br>
     <a href=<?= Route::GetGroupByName("Account")->GetRoute("connection")->link ?>>connection</a>  <br>
     <a href=<?= Route::GetGroupByName("Account")->GetRoute("inscription")->link ?>>inscription</a>  <br>
+    <a href=<?= Route::GetGroupByName("Account")->GetRoute("disconnect")->link ?>>disconnect</a>  <br>
 </nav>

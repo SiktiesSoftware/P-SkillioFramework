@@ -24,8 +24,8 @@ class Auth
     public static function HasPermission() : array
     {
         /** Get the role of the user */
-        $userRole = "admin";
-        //$userRole = "user";
+        //$userRole = "admin";
+        $userRole = "user";
 
         // Check if the datas aren't null
         if(!is_null(Middleware::$datas))

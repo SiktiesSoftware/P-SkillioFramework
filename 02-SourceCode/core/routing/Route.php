@@ -1,18 +1,20 @@
 <?php
 include_once __DIR__."/Group.php";
 include_once __DIR__."/Middleware.php";
+include_once __DIR__."/Verification.php";
 
 /**
  * Manage the routes
  */
 class Route
 {
-    public string $link, $folder, $file, $name, $method;        // Link, folder, file and name of the route
+    public string $link, $folder, $file, $name, $method;       // Link, folder, file and name of the route
     public array $function;                                     // Function of the assigned controller
 
     public static array $routes;                                // Array of routes
     public static array $groups;                                // Array of groups
     public static array $middlewares;                           // Array of middlewares
+    public static array $verifications;                         // Array of middlewares
 
     /**
      * Route class constructor
@@ -22,7 +24,7 @@ class Route
      * @param file => File of the route
      * @param function => Function of the route
      */
-    private function __construct(string $link, string $folder, string $file, array $function)
+    private function __construct(string $link, string $folder, $file, array $function)
     {
         $this->link = $link;
         $this->folder = $folder;
@@ -118,6 +120,30 @@ class Route
     }
 
     /**
+     * Set a verifications of few routes
+     * 
+     * @param controller => Controller of the verification
+     * @param file => File name of the selected verification
+     * @param routes => Routes entered on the verification
+     * 
+     * @return Verification => verification created
+     */
+    public static function Verification($controller, $routes) : Verification
+    {
+        // Set the controller of the group to the routes
+        foreach ($routes as $key => $route)
+        {
+            $routes[$key]->function["controller"] = $controller;
+            $routes[$key]->link = "/verify".$route->link;
+        }
+
+        // Set a new group and add them to the array
+        $verification = new Verification($routes);
+        Route::$verifications[] = $verification;
+        return $verification;
+    }
+
+    /**
      * Set the name of the route
      * 
      * @param name => name of the route
@@ -184,6 +210,26 @@ class Route
 
             // Return the route
             return $middleware;
+        }
+    }
+
+    /**
+     * Get a group by his name
+     * 
+     * @param name => name of the route
+     * 
+     * @return Group => Group requested
+     */
+    public static function GetVerificationByName(string $name) : Verification
+    {
+        // Browse all routes by one and return the one who has the same name
+        foreach (Route::$verifications as $key => $verification) 
+        {
+            // Check if the actual route has the same name that entered
+            if ($verification->name !== $name) continue;
+
+            // Return the route
+            return $verification;
         }
     }
 }

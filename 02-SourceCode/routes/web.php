@@ -71,6 +71,20 @@ class Web
             'account', 'Inscription.php'
             )->Name('inscription');
 
+        Route::Post('/account/disconnect', 
+            ["function" => 'Disconnect'],
+            '', ''
+            )->Name('disconnect');
+
+        /**
+         * Verifications
+         */
+        // Login
+        Route::Post('/login', 
+            ["function" => 'verifyLogin'],
+            '', ''
+            )->Name('verifyLogin');
+
         /**
          * Errors
          */
@@ -99,7 +113,8 @@ class Web
         Route::Group(AccountController::class, 
         [
             Route::GetRouteByName("connection"),
-            Route::GetRouteByName("inscription")
+            Route::GetRouteByName("inscription"),
+            Route::GetRouteByName("disconnect")
         ])->Name("Account");
 
         // Error group
@@ -133,6 +148,17 @@ class Web
             Route::GetRouteByName("users"),
             Route::GetRouteByName("user")
         ])->Name("users");
+    }
+
+    /**
+     * Set all the verifications
+     */
+    public static function Verifications()
+    {
+        Route::Verification(AccountController::class,
+        [
+            Route::GetRouteByName("verifyLogin")
+        ])->Name("verifyAuth");
     }
 }
 ?>
