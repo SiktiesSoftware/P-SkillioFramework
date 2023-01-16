@@ -41,7 +41,7 @@ class MainController
 
         // Get the controller and display page
         $currentController = $this->GetController($controller);
-        $this->viewBuild($currentController, $callable, $folder, $file);
+        $this->viewBuild($currentController, $callable, $folder, $file, $link);
     }
 
     /**
@@ -85,10 +85,10 @@ class MainController
      * @param folder => Folder of the view
      * @param file => File of the view
      */
-    private function viewBuild($currentController, string $callable, $folder, $file) 
+    private function viewBuild($currentController, string $callable, $folder, $file, $link) 
     {
         // Get the content from the current controller
-        $content = Controller::Display($callable, $folder, $file, $currentController);
+        $content = Controller::Display($callable, $folder, $file, $currentController, $link);
 
         // Include the head
         include(dirname(__FILE__) . '/../pages/includes/head.php');

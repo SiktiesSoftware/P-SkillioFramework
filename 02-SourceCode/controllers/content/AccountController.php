@@ -1,5 +1,7 @@
 <?php
 include_once __DIR__."/../../core/Controller.php";
+include_once __DIR__."/../../core/form/DataRequest.php";
+include_once __DIR__."/../../core/form/Verifications.php";
 include_once __DIR__."/../../core/View.php";
 
 /**
@@ -12,7 +14,7 @@ class AccountController extends Controller
     const INCORRECT_LOGIN = "The password or the nickname is false";
 
     /**
-     * Display contact page
+     * Display the connection page
      * 
      * @return content => content of a page
      */
@@ -46,7 +48,7 @@ class AccountController extends Controller
     }
 
     /**
-     * Display contact page
+     * Disply the inscription page
      * 
      * @return content => content of a page
      */
@@ -140,6 +142,25 @@ class AccountController extends Controller
         {
             header("location: ". Route::GetRouteByName("home")->link);
         }
+    }
+
+    /**
+     * Verify the informations from the $_POST for the inscriptions
+     */
+    public function VerifySignIn(DataRequest $request)
+    {
+        // Set the verifications object with the request
+        $verifications = new Verifications($request);
+
+        // Set the validations
+        $request->Validate([
+            "login" => 
+            [
+                $verifications->Required(),
+                $verifications->Max(255),
+                $verifications->Date()->After(new DateTime("12/31/2019"))
+            ]
+        ]);
     }
 
     /**

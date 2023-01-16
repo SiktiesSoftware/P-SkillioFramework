@@ -57,16 +57,6 @@ class Application
         $url = Request::GetUrl();
         $this->route = Request::GetRoute($url);
 
-        // Check if the route link contains "/verify"
-        if (str_contains($this->route->link, "/verify")) 
-        {
-            // Check if the post variable is set
-            if (!isset($_POST) || count($_POST) <= 0) 
-            {
-                header("location: ".Route::GetRouteByName("home")->link);
-            }
-        }
-
         // Check if a middleware needs to be called
         if (isset(Route::$middlewares)) 
         {

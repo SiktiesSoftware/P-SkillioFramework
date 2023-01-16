@@ -85,6 +85,11 @@ class Web
             '', ''
             )->Name('verifyLogin');
 
+        Route::Post('/signin', 
+            ["function" => 'VerifySignIn'],
+            '', ''
+            )->Name('VerifySignIn');
+
         /**
          * Errors
          */
@@ -157,7 +162,8 @@ class Web
     {
         Route::Verification(AccountController::class,
         [
-            Route::GetRouteByName("verifyLogin")
+            Route::GetRouteByName("verifyLogin"),
+            Route::GetRouteByName("VerifySignIn")
         ])->Name("verifyAuth");
     }
 }
