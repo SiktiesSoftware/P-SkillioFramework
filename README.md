@@ -49,6 +49,7 @@
     - Command witch generate automatically the connection and inscription back/front-end
     - Migrations (Generation of complete database)
     - Create a form with a php code in core
+    - Simplify checking some elements (like $errors->any)
    ## <p align="center">Contributors</p>
    <b>
        <a href="https://github.com/dam277">Damien Loup</a>
