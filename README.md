@@ -48,6 +48,7 @@
     - Basic auto Verifications for a sended form with options
     - Command witch generate automatically the connection and inscription back/front-end
     - Migrations (Generation of complete database)
+    - Create a form with a php code in core
    ## <p align="center">Contributors</p>
    <b>
        <a href="https://github.com/dam277">Damien Loup</a>
