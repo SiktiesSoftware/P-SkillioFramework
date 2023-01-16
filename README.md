@@ -44,7 +44,10 @@
    The project consists to create an entire PHP web framework (Skilio)
    
    ## <p align="center">Elements to do</p>
-
+    - Automatic commands to generate files
+    - Basic auto Verifications for a sended form with options
+    - Command witch generate automatically the connection and inscription back/front-end
+    - Migrations (Generation of complete database)
    ## <p align="center">Contributors</p>
    <b>
        <a href="https://github.com/dam277">Damien Loup</a>
