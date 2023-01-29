@@ -1,6 +1,6 @@
 <main>
 INSCRIPTION.PHP
-<form action="<?= Route::GetVerificationByName("verifyAuth")->GetRoute("verifySignin")->link ?>" method="POST">
+<form action="<?= Route::GetVerificationByName("verifyAuth")->GetRoute("VerifySignIn")->link ?>" method="POST">
     <input type="text" name="nickname" id="nickname">
     <?= isset($errors["nickname"]) ? '<p style="color:red;"/>' . $errors["nickname"] . '' : ' ' ?>
     <br>

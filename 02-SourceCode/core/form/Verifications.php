@@ -9,16 +9,14 @@ include_once __DIR__."/../../core/form/Complements/Date.php";
  */
 class Verifications
 {
-    private DataRequest $request;             // Datas from the request
-
     /**
      * Class constructor
      * 
      * @param request => Data request
      */
-    public function __construct($request)
+    public function __construct()
     {
-        $this->request = $request;
+
     }
     
     /**
@@ -35,8 +33,22 @@ class Verifications
      * Verify if the field have a maximum of X characters
      * 
      * MAXIMUM X CHARACTERS
+     * 
+     * @param max => Maximum of characters possible
      */
     public function Max(int $max)
+    {
+
+    }
+
+    /**
+     * Verify if the field have a maximum of X characters
+     * 
+     * MAXIMUM X CHARACTERS
+     * 
+     * @param min => Minimum of characters possible
+     */
+    public function Min(int $min)
     {
 
     }
@@ -45,8 +57,10 @@ class Verifications
      * Check if the field is a date and what date it have to be 
      * 
      * DATE FIELD MAY BE SET AT A CORRECT DATE
+     * 
+     * @return ?Date => Maybe date object
      */
-    public function Date() : Date
+    public function Date() : ?Date
     {
         return new Date();
     }

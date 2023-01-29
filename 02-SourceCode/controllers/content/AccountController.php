@@ -148,17 +148,28 @@ class AccountController extends Controller
      * Verify the informations from the $_POST for the inscriptions
      */
     public function VerifySignIn(DataRequest $request)
-    {
-        // Set the verifications object with the request
-        $verifications = new Verifications($request);
-
+    {        
         // Set the validations
         $request->Validate([
-            "login" => 
+            "nickname" => 
             [
-                $verifications->Required(),
-                $verifications->Max(255),
-                $verifications->Date()->After(new DateTime("12/31/2019"))
+                "Required",
+                "Max:255",
+                "Date()->After:12/31/2019"
+            ],
+            "password" =>
+            [
+                "Required",
+                "Max:255",
+                "Min:8",
+                "Date()->After:12/31/2019"
+            ],
+            "passwordConfirm" =>
+            [
+                "Required",
+                "Max:255",
+                "Min:8",
+                "Date()->After:12/31/2019"
             ]
         ]);
     }
