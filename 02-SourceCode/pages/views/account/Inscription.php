@@ -1,3 +1,0 @@
-<main>
-INSCRIPTION.PHP
-</main>
