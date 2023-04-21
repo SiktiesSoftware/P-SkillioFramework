@@ -32,14 +32,14 @@
    ## The project
    The project consists to create an entire PHP web framework
    ## Features
-   Automatic commands to generate files
-   Basic auto Verifications for a sended form with options
-   Command witch generate automatically the connection and inscription back/front-end
-   Migrations (Generation of complete database)
-   Create a form with a php code in core
-   Simplify checking some elements (like $errors->any)
-   Ressource file with pre-implemented items
-   Template engine for this framewok with new tags (for, foreach, forerror, if, while, debug)
+   Automatic commands to generate files                                             <br />
+   Basic auto Verifications for a sended form with options                          <br />
+   Command witch generate automatically the connection and inscription back/front-end <br />
+   Migrations (Generation of complete database)                                     <br />
+   Create a form with a php code in core                                            <br />
+   Simplify checking some elements (like $errors->any)                              <br />
+   Ressource file with pre-implemented items                                        <br />
+   Template engine for this framewok with new tags (for, foreach, forerror, if, while, debug) 
 
    ## Contributors
    | <b> <a href="https://github.com/dam277">Damien Loup</a> </b>       |
@@ -48,4 +48,7 @@
    
    ## Other links
    <a href="https://dam277.github.io/P_Portfolio/">Portfolio</a>                     <br />
+   <a href="https://github.com/dam277/P-SkilioFramework-e2eValidator">Skilioframework e2e validator</a>                     <br />
+   <a href="https://github.com/dam277/P-SkilioFramework-VsCodeExtension">Skilioframework VsCode extension</a>                     <br />
+   <a href="https://github.com/dam277/P-SkilioFramework-TemplateEngine">Skilioframework template engine</a>                     <br />
 </div>
