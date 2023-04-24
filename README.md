@@ -47,7 +47,7 @@
    | <img height="200px" src="https://avatars.githubusercontent.com/u/60733960?v=4" /> |
    
    ## Other links
-   <a href="https://dam277.github.io/P_Portfolio/">Portfolio</a>                     <br />
+   <a href="https://dam277.github.io/dam277/">Portfolio</a>                     <br />
    <a href="https://github.com/dam277/P-SkilioFramework-e2eValidator">Skilioframework e2e validator</a>                     <br />
    <a href="https://github.com/dam277/P-SkilioFramework-VsCodeExtension">Skilioframework VsCode extension</a>                     <br />
    <a href="https://github.com/dam277/P-SkilioFramework-TemplateEngine">Skilioframework template engine</a>                     <br />
