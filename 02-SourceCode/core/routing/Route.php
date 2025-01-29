@@ -1,145 +1,41 @@
 <?php
-include_once __DIR__."/Router.php";
+include_once __DIR__."/RoutingBase.php";
 
-/**
- * Manages the routes
- */
-class Route extends Router
+class Route extends RoutingBase 
 {
-    public string $name, $link, $method;                    // Name, link anf Method of the route
-    public array $action;                                   // Action of the route
-    public ?array $middlewares, $verifications;             // Array of possibles middlewares and verifications
+    public string $link, $folder, $file, $name, $method;
+    public array $params, $controllerDestination;
 
-    /**
-     * Class constructor
-     * 
-     * @param link => Link of the route
-     * @param action => action of the route
-     * @param ?file => File of the view for the route
-     * @param ?folder => Folder of the view for the route
-     */
-    public function __construct(string $link, string $method)
+    public static array $routes = [];   // Array of routes
+
+    public function __construct(string $link, string $folder, string $file, array $controllerDestination, array $params)
     {
         $this->link = $link;
-        $this->method = $method;
+        $this->folder = $folder;
+        $this->file = $file;
+        $this->controllerDestination = $controllerDestination;
+        $this->params = $params;
     }
 
     /**
-     * Default route
+     * Set a new route and add them to the array
      * 
      * @param link => Link of the route
-     * @param action => action of the route
-     * @param ?file => File of the view for the route
-     * @param ?folder => Folder of the view for the route
+     * @param folder => Folder of the route
+     * @param file => File of the route
+     * @param function => Function of the route
+     * 
+     * @return Route => New route
      */
-    public static function Default(string $link, $action) : Route
+    public static function Get(string $link, array $controllerDestination, string $file, string $folder, $params) : Route
     {
-        $route = new Route($link, "DEFAULT");
-        $route->ActionMethod($action);
-        parent::AddRoute($route);
+        // Set a new route and add them to the array
+        $route = new Route($link, $folder, $file, $controllerDestination, $params);
+        $route->method = "GET";
+        Route::$routes[] = $route;
+
+        // return the actual route
         return $route;
     }
-
-    /**
-     * Redirection only route
-     */
-    public static function Redirect()
-    {
-
-    }
-
-    /**
-     * Get method route
-     * 
-     * @param link => Link of the route
-     * @param action => action of the route
-     * @param ?file => File of the view for the route
-     * @param ?folder => Folder of the view for the route
-     */
-    public static function Get(string $link, $action) : Route
-    {
-        $route = new Route($link, "GET");
-        $route->ActionMethod($action);
-        parent::AddRoute($route);
-        return $route;
-    }
-
-    /**
-     * Post method route
-     * 
-     * @param link => Link of the route
-     * @param action => action of the route
-     * @param ?file => File of the view for the route
-     * @param ?folder => Folder of the view for the route
-     */
-    public static function Post(string $link, $action) : Route
-    {
-        $route = new Route($link, "POST");
-        $route->ActionMethod($action);
-        parent::AddRoute($route);
-        return $route;
-    }
-
-    /**
-     * Define the action method in the array
-     * 
-     * @param action => action of the route
-     */
-    private function ActionMethod($action)
-    {
-        // Check if the action is a callable (anonym function)
-        if (is_callable($action)) 
-        {
-            $this->action["type"] = "anonym";
-            $this->action["controller"] = null;
-            $this->action["function"] = $action;
-        } // Check if the action is a string
-        else if (is_string($action))
-        {
-            // Set the action type
-            $this->action["type"] = "string";
-
-            // Check if the action contains a @
-            if (str_contains($action, "@")) 
-            {
-                // Explode the action to get the class and the function
-                $actionParts = explode("@", $action);
-                // Get the controller
-                $this->action["controller"] = $actionParts[0];
-                // Get the function
-                $this->action["function"] = $actionParts[1];
-            }
-        } // Check if the action is an array
-        else if(is_array($action))
-        {
-            // Set the action type
-            $this->action["type"] = "array";
-            // Get the controller
-            $this->action["controller"] = $action[0];
-            // Get the function
-            $this->action["function"] = $action[1];
-        }
-
-        self::$routes[] = $this;
-    }
-
-    /**
-     * Groupe of multiple routes
-     */
-    public static function Group(string $link, $action)
-    {
-
-    }
-
-    /**
-     * Set the name of the route
-     * 
-     * @param name => name of the route
-     */
-    public function Name(string $name) : void
-    {
-        $this->name = $name;
-    }
-
 }
 ?>

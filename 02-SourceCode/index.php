@@ -2,8 +2,7 @@
 // Start the session
 session_start();
 
-// Include session and Application class
-include_once __DIR__."/core/SessionStart.php";
+// Include Application class
 include_once __DIR__."/core/Application.php";
 
 // Set the session array

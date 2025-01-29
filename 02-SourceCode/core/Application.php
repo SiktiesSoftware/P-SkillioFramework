@@ -1,26 +1,9 @@
-<?php
-
-use LDAP\Result;
-
-include_once __DIR__."/controllers/MainController.php";
+<?php 
 include_once __DIR__."/Request.php";
 
-/**
- * Manage the application routing, redirect, etc...
- */
 class Application
 {
-    private MainController $mainController;        // Main controller object
     private static Application $instance;          // Instance of the application
-
-    /**
-     * Application class constructor
-     */
-    private function __construct()
-    {
-        // Set maincontroller
-        $this->mainController = new MainController();
-    }
 
     /**
      * Get the instance of the application
@@ -43,12 +26,14 @@ class Application
     }
 
     /**
-     * Run the application and get the requested url / Route
+     * Run the routes and get the requested url
      */
     public function Run() : void
     {
-        $request = new Request();
-        $this->mainController->Dispatch($request);
+        echo "run";
+
+        // Get the requested url
+        $url = Request::GetUrl();
     }
 }
 ?>
