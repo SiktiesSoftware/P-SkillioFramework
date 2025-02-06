@@ -1,7 +1,6 @@
 <?php
-include_once __DIR__."/RoutingBase.php";
 
-class Route extends RoutingBase 
+class Route
 {
     public string $link, $folder, $file, $name, $method;
     public array $params, $controllerDestination;
@@ -15,6 +14,16 @@ class Route extends RoutingBase
         $this->file = $file;
         $this->controllerDestination = $controllerDestination;
         $this->params = $params;
+    }
+
+    /**
+     * Set the name of the route
+     * 
+     * @param name => name of the route
+     */
+    public function name(string $name) : void
+    {
+        $this->name = $name;
     }
 
     /**
@@ -36,6 +45,26 @@ class Route extends RoutingBase
 
         // return the actual route
         return $route;
+    }
+    
+    /**
+     * Get a route by his name
+     * 
+     * @param name => name of the route
+     * 
+     * @return Route => Route requested
+     */
+    public static function getRouteByName(string $name) : Route
+    {
+        // Browse all routes by one and return the one who has the same name
+        foreach (Route::$routes as $key => $route) 
+        {
+            // Check if the actual route has the same name that entered
+            if ($route->name !== $name) continue;
+
+            // Return the route
+            return $route;
+        }
     }
 }
 ?>

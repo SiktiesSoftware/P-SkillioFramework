@@ -1,5 +1,6 @@
 <?php 
 include_once __DIR__."/Request.php";
+include_once __DIR__."/../routes/web.php";
 
 class Application
 {
@@ -30,10 +31,11 @@ class Application
      */
     public function Run() : void
     {
-        echo "run";
-
         // Get the requested url
         $url = Request::GetUrl();
+        $route = Request::GetRoute($url);
+        echo $route->link;
+
     }
 }
 ?>
