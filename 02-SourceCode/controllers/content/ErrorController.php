@@ -12,9 +12,9 @@ class ErrorController extends Controller
      * 
      * @return view => View page of error
      */
-    public function E403()
+    public function E403() 
     {
-        return View::Get($this->folder, $this->file);
+        return ["content" => View::Get($this->folder, $this->file), "api" => false];
     }
 
     /**
@@ -24,7 +24,7 @@ class ErrorController extends Controller
      */
     public function E404()
     {
-        return View::Get($this->folder, $this->file);
+        return ["content" => View::Get($this->folder, $this->file), "api" => false];
     }
 }
 

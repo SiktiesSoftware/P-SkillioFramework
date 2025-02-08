@@ -13,7 +13,7 @@ class UserController extends Controller
      * 
      * @return content => Content of the page User.php with the variables set
      */
-    public function Users()
+    public function Users() : array
     {
         // Get all users
         $usersArray = t_user::GetAll();
@@ -37,15 +37,16 @@ class UserController extends Controller
         $content = ob_get_clean();
 
         // Return the content of the page + variables set
-        return $content;
+        return ["content" => $content, "api" => false];
     }
 
     /**
      * Display page User with the user selected by ID
      * 
      * @return content => Content of the page User.php with the variables set
+     * @return api => if the page is an api
      */
-    public function User()
+    public function User() : array
     {
         // Get the user by id
         $userArray = t_user::GetUserByIdUser($_GET["id"]);
@@ -60,7 +61,7 @@ class UserController extends Controller
         $content = ob_get_clean();
         
         // Return the content of the page + variables set
-        return $content;
+        return ["content" => $content, "api" => false];
     }
 }
 

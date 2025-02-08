@@ -11,8 +11,9 @@ class HomeController extends Controller
      * Display home page
      * 
      * @return content => content of a page
+     * @return api => if the page is an api
      */
-    public function Home()
+    public function Home() : array
     {
         // Return the content of a page ===> INCLUDE THE COMPONENTS INTO THE PAGE
         $homeTranslations = Lang::GetTranslations("home");
@@ -26,7 +27,7 @@ class HomeController extends Controller
         $content = ob_get_clean();
 
         // Return the content of the page + variables set
-        return $content;
+        return ["content" => json_encode(["test" => "test"]), "api" => true];
     }
 
     /**
@@ -47,7 +48,7 @@ class HomeController extends Controller
         $content = ob_get_clean();
 
         // Return the content of the page + variables set
-        return $content;
+        return ["content" => $content, "api" => false];
     }
 }
 

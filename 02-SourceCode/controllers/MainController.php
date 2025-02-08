@@ -88,25 +88,36 @@ class MainController
     private function viewBuild($currentController, string $callable, $folder, $file, $link) 
     {
         // Get the content from the current controller
-        $content = Controller::Display($callable, $folder, $file, $currentController, $link);
-
-        // Include the head
-        include(dirname(__FILE__) . '/../pages/includes/head.php');
+        $display_result = Controller::Display($callable, $folder, $file, $currentController, $link);
 
         // Check if an error occured or not and display the page
         if ($currentController::class == ErrorController::class) 
         {
+            // Include the head
+            include(dirname(__FILE__) . '/../pages/includes/head.php');
+
             // Display the page content
-            echo $content;
+            echo $display_result["content"];
+        } 
+        else if($display_result["api"]) 
+        {
+            // Display the api content
+            echo $display_result["content"];
         } 
         else 
         {
+            // Include the head
+            include(dirname(__FILE__) . '/../pages/includes/head.php');
+
             // Include the header
             include(dirname(__FILE__) . '/../pages/includes/header.php');
+
             // Include the navigation
             include(dirname(__FILE__) . '/../pages/includes/nav.php');
+            
             // Display the page content
-            echo $content;
+            echo $display_result["content"];
+
             // Include the footer
             include(dirname(__FILE__) . '/../pages/includes/footer.php');
         }

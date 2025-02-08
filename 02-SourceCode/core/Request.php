@@ -44,7 +44,7 @@ class Request
      * @param url => url of the request
      * @return ?Route => Actual route
      */
-    public static function GetRoute($url) : ?Route
+    public static function GetRoute($url) : Route
     {
         // Set the CSS return
         $uri = str_replace("/", " ", $url);
@@ -53,8 +53,6 @@ class Request
         { 
             Request::$cssLinkReturn .= "../";
         }
-
-        $found = false; // Define if the url is a created one or not (Route => Web.php)
         
         // Browse all the routes by one and callback at the request url or display error
         foreach (Route::$routes as $key => $route) 
@@ -66,14 +64,8 @@ class Request
             $found = true;
             return $route;
         }
-        
-        // Check if the url is not found and display error
-        if (!$found) 
-        {
-            // Return 404 error
-            header("location: ".Route::GetRouteByName("404")->link);
-        }
 
+        return Route::GetRouteByName("404");
     }
 }
 

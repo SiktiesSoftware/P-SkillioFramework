@@ -44,7 +44,7 @@ class AccountController extends Controller
         unset($_SESSION["errors"]);
 
         // Return the content of the page + variables set
-        return $content;
+        return ["content" => $content, "api" => false];
     }
 
     /**
@@ -65,7 +65,7 @@ class AccountController extends Controller
         $content = ob_get_clean();
 
         // Return the content of the page + variables set
-        return $content;
+        return ["content" => $content, "api" => false];
     }
 
     /**
