@@ -39,6 +39,7 @@ class Application
             header('Access-Control-Allow-Origin: *');
             header('Access-Control-Allow-Methods: GET, POST');
             header("Access-Control-Allow-Headers: X-Requested-With");
+            Lang::Setup();
         }
 
         // Return application
@@ -55,6 +56,12 @@ class Application
         Web::Groups();
         Web::Middlewares();
         Web::Verifications();
+
+        // Check if the lang is set
+        if (!isset($_GET["lang"])) 
+            header("location: ?lang=".$_SESSION["lang"]);
+
+        $_SESSION["lang"] = $_GET["lang"];
 
         // Get the url
         $url = Request::GetUrl();

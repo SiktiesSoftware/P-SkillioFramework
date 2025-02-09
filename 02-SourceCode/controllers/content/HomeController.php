@@ -14,9 +14,14 @@ class HomeController extends Controller
      * @return api => if the page is an api
      */
     public function Home() : array
-    {
+    {   
+        if (!isset($_GET["lang"])) 
+        {
+            $_GET["lang"] = "en";
+        }
+
         // Return the content of a page ===> INCLUDE THE COMPONENTS INTO THE PAGE
-        $homeTranslations = Lang::GetTranslations("home");
+        $homeTranslations = Lang::GetTranslations("home", $_GET["lang"]);
 
         // Get the view
         $view = View::Get($this->folder, $this->file);
@@ -27,7 +32,7 @@ class HomeController extends Controller
         $content = ob_get_clean();
 
         // Return the content of the page + variables set
-        return ["content" => json_encode(["test" => "test"]), "api" => true];
+        return ["content" => $content, "api" => false];
     }
 
     /**

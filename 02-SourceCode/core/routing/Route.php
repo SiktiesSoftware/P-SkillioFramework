@@ -24,7 +24,7 @@ class Route
      * @param file => File of the route
      * @param function => Function of the route
      */
-    private function __construct(string $link, string $folder, $file, array $function)
+    private function __construct(string $link, string $folder, string $file, array $function)
     {
         $this->link = $link;
         $this->folder = $folder;
@@ -42,7 +42,7 @@ class Route
      * 
      * @return Route => New route
      */
-    public static function Get(string $link, array $function, string $file, $folder) : Route
+    public static function Get(string $link, array $function, string $file, string $folder) : Route
     {
         // Set a new route and add them to the array
         $route = new Route($link, $file, $folder, $function);
@@ -63,7 +63,7 @@ class Route
      * 
      * @return Route => New route
      */
-    public static function Post(string $link, array $function, string $file, $folder) : Route
+    public static function Post(string $link, array $function, string $file, string $folder) : Route
     {
         // Set a new route and add them to the array
         $route = new Route($link, $file, $folder, $function);

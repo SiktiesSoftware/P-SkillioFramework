@@ -2,6 +2,7 @@
 include_once __DIR__."/../controllers/content/ErrorController.php";
 include_once __DIR__."/../controllers/content/HomeController.php";
 include_once __DIR__."/../controllers/content/UserController.php";
+include_once __DIR__."/../controllers/content/LanguageController.php";
 include_once __DIR__."/form/DataRequest.php";
 
 /**

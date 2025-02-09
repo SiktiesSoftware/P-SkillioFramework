@@ -1,13 +1,13 @@
 <!-- Manage the languages -->
-<form id="form" action="<?=$_SERVER["REQUEST_URI"]?>" method="POST">
+<form id="languageForm" action="<?=$_SERVER["REQUEST_URI"]?>" method="GET">
   <select name="lang" id="lang">
-    <option><?= strtoupper($_SESSION["lang"]) ?></option>
+    <option><?= strtoupper($_GET["lang"]) ?></option>
     <?php
     // Display all the languages
     foreach (Lang::$languages as $key => $lang)
     {
         // Define if the actual language is equal to the current lang on the list
-        if($lang == $_SESSION["lang"]) continue;
+        if($lang == $_GET["lang"]) continue;
     ?>
         <!-- Display the langs -->
         <option value="<?= $lang ?>"><?= strtoupper($lang) ?></option>
@@ -24,17 +24,6 @@
   // Add a change event listener to the select element
   selectElement.addEventListener('change', function() 
   {
-    // Get the selected value
-    const selectedValue = this.value;
-
-    // Set the value as a hidden field in the form
-    // const hiddenField = document.createElement('input');
-    // hiddenField.type = 'hidden';
-    // hiddenField.name = 'lang'; 
-    // hiddenField.value = selectedValue;
-    // document.getElementById('form').appendChild(hiddenField);
-
-    // // Submit the form to send the selected value to the server
-    // document.getElementById('form').submit();
+    document.getElementById('languageForm').submit();
   });
 </script>

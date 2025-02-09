@@ -4,6 +4,7 @@ include_once __DIR__."/content/ErrorController.php";
 include_once __DIR__."/content/HomeController.php";
 include_once __DIR__."/content/UserController.php";
 include_once __DIR__."/content/AccountController.php";
+include_once __DIR__."/content/LanguageController.php";
 include_once __DIR__."/../core/Component.php";
 
 /**
@@ -68,6 +69,9 @@ class MainController
             case AccountController::class:
                 $link = new AccountController();
                 break;
+            case LanguageController::class:
+                $link = new LanguageController();
+                break;
             default:
                 $link = null;
                 break;
@@ -89,13 +93,12 @@ class MainController
     {
         // Get the content from the current controller
         $display_result = Controller::Display($callable, $folder, $file, $currentController, $link);
-
         // Check if an error occured or not and display the page
         if ($currentController::class == ErrorController::class) 
         {
             // Include the head
             include(dirname(__FILE__) . '/../pages/includes/head.php');
-
+            
             // Display the page content
             echo $display_result["content"];
         } 

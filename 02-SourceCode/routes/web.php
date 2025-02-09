@@ -1,6 +1,5 @@
 <?php
 include_once __DIR__."/../core/routing/Route.php";
-include_once __DIR__."/../core/routing/Route.php";
 
 /**
  * manage the routes creations
@@ -57,6 +56,11 @@ class Web
             ["function" => 'User'],
             'users', 'User.php'
             )->Name('user');
+
+        Route::Get('/language', 
+            ["controller" => LanguageController::class, "function" => 'GetLanguage'],
+            '', ''
+            )->Name('language');
 
         /**
          * Account
