@@ -66,6 +66,7 @@ class Application
         // Get the url
         $url = Request::GetUrl();
         $this->route = Request::GetRoute($url);
+        echo "ROUTE : ".$this->route->link."<br>";
 
         // Check if a middleware needs to be called
         if (isset(Route::$middlewares)) 
@@ -81,7 +82,7 @@ class Application
 
                     // Execute the middlewares
                     $access = $middleware->Exec();
-
+                    
                     // Check if the middleware is successful
                     if ($access["hasAccess"] == false) 
                     {

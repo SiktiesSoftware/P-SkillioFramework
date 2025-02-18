@@ -32,9 +32,15 @@ class Web
          */
         // Home page
         Route::Post('/', 
-            ["controller" => HomeController::class, "function" =>  'Home'],
+            ["controller" => HomeController::class, "function" => 'Home'],
             'home', 'Home.php'
             )->Name('home');
+
+        // Books page
+        Route::Get('/books/{id}/page/{page}', 
+            ["controller" => HomeController::class, "function" => 'Books'],
+            'home', 'Books.php'
+            )->Name('books');
 
         // Contact page
         Route::Post('/contact', 

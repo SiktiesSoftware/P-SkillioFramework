@@ -43,9 +43,30 @@ class HomeController extends Controller
     public function Contact()
     {
         // Return the content of a page ===> INCLUDE THE COMPONENTS INTO THE PAGE
-
+        
         // Get the view
         $view = View::Get($this->folder, $this->file);
+
+        // Replace variables
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        // Return the content of the page + variables set
+        return ["content" => $content, "api" => false];
+    }
+
+    /**
+     * Display books page
+     * 
+     * @return content => content of a page
+     */
+    public function Books()
+    {
+        $view = View::Get($this->folder, $this->file);
+
+        $id = Request::$params["id"];
+        $page = Request::$params["page"];
 
         // Replace variables
         ob_start();

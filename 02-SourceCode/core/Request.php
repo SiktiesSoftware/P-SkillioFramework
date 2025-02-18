@@ -14,7 +14,8 @@ class Request
      * With this semi framework (native languages) we need to implement CSS like that
      * <link rel="stylesheet" href="<?= Request::$cssLinkReturn ?>link/main.css">
      */
-    public static $cssLinkReturn;
+    public static string $cssLinkReturn = "";
+    public static array $params;
 
     /**
      * Get the url of the server request uri
@@ -42,10 +43,12 @@ class Request
      * Get the route selected by the url
      * 
      * @param url => url of the request
-     * @return ?Route => Actual route
+     * @return Route => Actual route
      */
-    public static function GetRoute($url) : Route
+    public static function GetRoute(string $url) : Route
     {
+        Request::$params = [];
+
         // Set the CSS return
         $uri = str_replace("/", " ", $url);
         $cssReturns = substr_count($uri, "/") - 1;
@@ -54,16 +57,40 @@ class Request
             Request::$cssLinkReturn .= "../";
         }
         
+        $dynamicUrl = null;
+
         // Browse all the routes by one and callback at the request url or display error
         foreach (Route::$routes as $key => $route) 
-        {
+        {   
             // Check if the link of actual route is as the url requested
-            if ($route->link !== $url) continue;
+            if ($route->link == $url) 
+                return $route;
+            elseif (strpos($route->link, "{")) 
+            {
+                // Get the pattern of the route
+                $pattern = preg_replace('/{[\w]+}/', '([\w-]+)', $route->link);
 
-            // Return the route and set the found variable to true
-            $found = true;
-            return $route;
+                // Check if the url match with the pattern
+                if (preg_match("$".$pattern."$", $url, $matches))
+                {
+                    // Remove the first element of the array and get the matches
+                    array_shift($matches);
+                    preg_match_all('/{([\w]+)}/', $route->link, $paramNames);
+
+                    // Get the names of the parameters
+                    foreach ($paramNames[1] as $index => $name) 
+                    {
+                        Request::$params[$name] = $matches[$index];
+                    }
+
+                    $dynamicUrl = $route;
+                }
+            }
         }
+
+        // Check if the dynamic url is set
+        if ($dynamicUrl != null) 
+            return $dynamicUrl;
 
         return Route::GetRouteByName("404");
     }
