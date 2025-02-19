@@ -32,6 +32,23 @@ class Route
         $this->function = $function;
     }
 
+    function GetLink(array $params = []): string 
+    {
+        $urlConfigs = include(__DIR__."/../../.config/url.config.php");
+
+        // Check if the params are set
+        if ($params == [] && !$urlConfigs["useIntegratedLanguageManagement"]) 
+            return $this->link;
+
+        $params["lang"] = $_SESSION["lang"];
+
+        // Browse all the params and replace them in the link
+        foreach ($params as $key => $value) 
+            $url = str_replace("{" . $key . "}", $value, $this->link);
+        
+        return $url;
+    }
+
     /**
      * Set a new route and add them to the array
      * 
@@ -45,7 +62,7 @@ class Route
     public static function Get(string $link, array $function, string $file, string $folder) : Route
     {
         // Set a new route and add them to the array
-        $route = new Route($link, $file, $folder, $function);
+        $route = new Route("/{lang}".$link, $file, $folder, $function);
         $route->method = "GET";
         Route::$routes[] = $route;
 
@@ -66,7 +83,7 @@ class Route
     public static function Post(string $link, array $function, string $file, string $folder) : Route
     {
         // Set a new route and add them to the array
-        $route = new Route($link, $file, $folder, $function);
+        $route = new Route("/{lang}".$link, $file, $folder, $function);
         $route->method = "POST";
         Route::$routes[] = $route;
 
@@ -119,6 +136,16 @@ class Route
         return $middleware;
     }
 
+    public static function AddPathName(Route $route, string $name, string $elementBefore = "lang", bool $isParam = false) : string
+    {   
+        // Check if the element is a param or no
+        if ($isParam) 
+            return preg_replace("/\{$elementBefore\}/", "{{$elementBefore}}/$name", $route->link, 1);
+        
+        // Return the new link
+        return preg_replace("/$elementBefore/", "$elementBefore/$name", $route->link, 1);
+    }
+
     /**
      * Set a verifications of few routes
      * 
@@ -134,7 +161,7 @@ class Route
         foreach ($routes as $key => $route)
         {
             $routes[$key]->function["controller"] = $controller;
-            $routes[$key]->link = "/verify".$route->link;
+            $routes[$key]->link = Route::AddPathName($routes[$key], "verify", isParam: true);
         }
 
         // Set a new group and add them to the array

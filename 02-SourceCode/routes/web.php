@@ -31,7 +31,7 @@ class Web
          * Home
          */
         // Home page
-        Route::Post('/', 
+        Route::Get('/', 
             ["controller" => HomeController::class, "function" => 'Home'],
             'home', 'Home.php'
             )->Name('home');
@@ -43,7 +43,7 @@ class Web
             )->Name('books');
 
         // Contact page
-        Route::Post('/contact', 
+        Route::Get('/contact', 
             ["controller" => HomeController::class, "function" => 'Contact'],
             'home', 'contact.php'
             )->Name('contact');

@@ -136,11 +136,11 @@ class AccountController extends Controller
         // Check if the verification was valid
         if (!$isValid) 
         {
-            header("location: ". Route::GetGroupByName("Account")->GetRoute("connection")->link);
+            header("location: ". Route::GetGroupByName("Account")->GetRoute("connection")->GetLink());
         }
         else
         {
-            header("location: ". Route::GetRouteByName("home")->link);
+            header("location: ". Route::GetRouteByName("home")->GetLink());
         }
     }
 
@@ -180,7 +180,7 @@ class AccountController extends Controller
     public function Disconnect()
     {
         unset($_SESSION["user"]);
-        header("location: ".Route::GetRouteByName("home")->link);
+        header("location: ".Route::GetRouteByName("home")->GetLink());
     }
 }
 

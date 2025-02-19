@@ -15,7 +15,7 @@ class Request
      * <link rel="stylesheet" href="<?= Request::$cssLinkReturn ?>link/main.css">
      */
     public static string $cssLinkReturn = "";
-    public static array $params;
+    public static array $params = [];
 
     /**
      * Get the url of the server request uri
@@ -23,7 +23,7 @@ class Request
      * @return string => Url of the request uri
      */
     public static function GetUrl() : string
-    {
+    {   
         // Get the url request
         $url = $_SERVER["REQUEST_URI"];
 
@@ -37,6 +37,19 @@ class Request
         }
 
         return $pageUrl;
+    }
+    
+    /**
+     * Check if the url finish by a slash
+     * 
+     * @param url => Url to check
+     * @return string => Url with a slash at the end
+     */
+    public static function CheckIfUrlFinishBySlash(string $url) : string
+    {
+        if (substr($url, -1) != "/") 
+            return $url."/";
+        return $url;
     }
 
     /**
@@ -53,26 +66,27 @@ class Request
         $uri = str_replace("/", " ", $url);
         $cssReturns = substr_count($uri, "/") - 1;
         for ($i = 0; $i < $cssReturns; $i++) 
-        { 
             Request::$cssLinkReturn .= "../";
-        }
         
-        $dynamicUrl = null;
-
+        // Check if the url finish by a slash
+        $url = Request::CheckIfUrlFinishBySlash($url);
+        
+        $dynamicRoute = null;
         // Browse all the routes by one and callback at the request url or display error
         foreach (Route::$routes as $key => $route) 
-        {   
+        {       
             // Check if the link of actual route is as the url requested
             if ($route->link == $url) 
                 return $route;
             elseif (strpos($route->link, "{")) 
             {
                 // Get the pattern of the route
-                $pattern = preg_replace('/{[\w]+}/', '([\w-]+)', $route->link);
+                $pattern = Request::CheckIfUrlFinishBySlash(preg_replace('/{[\w]+}/', '([\w-]+)', $route->link)); 
+                $patternWithoutLanguage = Request::CheckIfUrlFinishBySlash(preg_replace('/\/\(\[\\\w-\]\+\)/', '', $pattern, 1));
 
                 // Check if the url match with the pattern
-                if (preg_match("$".$pattern."$", $url, $matches))
-                {
+                if (preg_match("#^".$pattern."$#", $url, $matches))
+                {         
                     // Remove the first element of the array and get the matches
                     array_shift($matches);
                     preg_match_all('/{([\w]+)}/', $route->link, $paramNames);
@@ -83,14 +97,16 @@ class Request
                         Request::$params[$name] = $matches[$index];
                     }
 
-                    $dynamicUrl = $route;
+                    $dynamicRoute = $route;
                 }
+                elseif(preg_match("#^".$patternWithoutLanguage."$#", $url, $matches))
+                    return $route;
             }
         }
 
         // Check if the dynamic url is set
-        if ($dynamicUrl != null) 
-            return $dynamicUrl;
+        if ($dynamicRoute != null) 
+            return $dynamicRoute;
 
         return Route::GetRouteByName("404");
     }

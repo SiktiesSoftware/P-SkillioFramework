@@ -15,13 +15,8 @@ class HomeController extends Controller
      */
     public function Home() : array
     {   
-        if (!isset($_GET["lang"])) 
-        {
-            $_GET["lang"] = "en";
-        }
-
         // Return the content of a page ===> INCLUDE THE COMPONENTS INTO THE PAGE
-        $homeTranslations = Lang::GetTranslations("home", $_GET["lang"]);
+        $homeTranslations = Lang::GetTranslations("home", Request::$params["lang"]);
 
         // Get the view
         $view = View::Get($this->folder, $this->file);

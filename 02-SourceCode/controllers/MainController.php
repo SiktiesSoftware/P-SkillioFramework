@@ -93,6 +93,7 @@ class MainController
     {
         // Get the content from the current controller
         $display_result = Controller::Display($callable, $folder, $file, $currentController, $link);
+
         // Check if an error occured or not and display the page
         if ($currentController::class == ErrorController::class) 
         {

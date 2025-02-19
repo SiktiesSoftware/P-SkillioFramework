@@ -57,16 +57,19 @@ class Application
         Web::Middlewares();
         Web::Verifications();
 
-        // Check if the lang is set
-        if (!isset($_GET["lang"])) 
-            header("location: ?lang=".$_SESSION["lang"]);
-
-        $_SESSION["lang"] = $_GET["lang"];
-
+        // Check if the language is set
+        if (!isset($_SESSION["lang"])) 
+            $_SESSION["lang"] = "en";
+        
         // Get the url
         $url = Request::GetUrl();
         $this->route = Request::GetRoute($url);
-        echo "ROUTE : ".$this->route->link."<br>";
+
+        // Set the language
+        if (!isset(Request::$params["lang"]) || !in_array(Request::$params["lang"], Lang::$languages))
+            header("location:".$this->route->GetLink());
+        
+        $_SESSION["lang"] = Request::$params["lang"];
 
         // Check if a middleware needs to be called
         if (isset(Route::$middlewares)) 
@@ -85,17 +88,17 @@ class Application
                     
                     // Check if the middleware is successful
                     if ($access["hasAccess"] == false) 
-                    {
+                    {   
                         // Set the route to another set in the middleware
                         $this->route = $access["Request"];
-                        header("location: ".$this->route->link);
+                        header("location: ".$this->route->GetLink());
                     }
                     break;
                 }
             }
         }
         // Dispatch functions
-        $this->mainController->Dispatch($this->route->function["controller"], $this->route->function["function"], $this->route->link, $this->route->folder, $this->route->file, $this->route->name);
+        $this->mainController->Dispatch($this->route->function["controller"], $this->route->function["function"], $this->route->GetLink(), $this->route->folder, $this->route->file, $this->route->name);
     }
 }
 
