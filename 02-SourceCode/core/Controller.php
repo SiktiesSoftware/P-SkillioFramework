@@ -25,7 +25,7 @@ class Controller
      * 
      * @return function => return the content of a function
      */
-    public static function Display(string $callable, $folder, $file, $controller, $link)
+    public static function Display(string $callable, string $folder, string $file, mixed $controller, string $link) : mixed
     {
         // Set the folder and the file
         $controller->folder = $folder;
@@ -38,7 +38,7 @@ class Controller
             if (!isset($_POST) || count($_POST) <= 0) 
             {
                 // Redirect to the home page
-                header("location: ".Route::GetRouteByName("home")->link);
+                header("location: ".Route::GetRouteByName("home")->GetLink());
             }
 
             // Set the dataRequest

@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 include_once __DIR__."/../core/Controller.php";
 include_once __DIR__."/content/ErrorController.php";
 include_once __DIR__."/content/HomeController.php";
@@ -26,7 +29,7 @@ class MainController
      * @param file => File of the route (Example.php)
      * @param name => Name of the route
      */
-    public function Dispatch($controller, string $callable, $link, $folder, $file, $name) 
+    public function Dispatch(string $controller, string $callable, string $link, string $folder, string $file, string $name) : void 
     {
         // Check if the controller is set or no
         if (!isset($controller)) 
@@ -52,7 +55,7 @@ class MainController
      * 
      * @return link => Controller object
      */
-    private function GetController($controller)
+    private function GetController(string $controller) : mixed
     {
         // Check which controller to return
         switch ($controller) 
@@ -89,7 +92,7 @@ class MainController
      * @param folder => Folder of the view
      * @param file => File of the view
      */
-    private function viewBuild($currentController, string $callable, $folder, $file, $link) 
+    private function viewBuild(mixed $currentController, string $callable, string $folder, string $file, string $link) : void
     {
         // Get the content from the current controller
         $display_result = Controller::Display($callable, $folder, $file, $currentController, $link);

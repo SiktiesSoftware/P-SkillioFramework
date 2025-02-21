@@ -42,7 +42,7 @@ class Auth
                 // Return the good access
                 return ["hasAccess" => true];
             }
-        }   
+        }
 
         // Return the error
         return ["hasAccess" => false, "Request" => Route::GetRouteByName("403")];
