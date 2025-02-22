@@ -14,7 +14,7 @@ class ErrorController extends Controller
      */
     public function E403() 
     {
-        return ["content" => View::Get($this->folder, $this->file), "api" => false];
+        return ["content" => View::GetByName("403")->Parse(), "api" => false];
     }
 
     /**
@@ -24,7 +24,7 @@ class ErrorController extends Controller
      */
     public function E404()
     {
-        return ["content" => View::Get($this->folder, $this->file), "api" => false];
+        return ["content" => View::GetByName("404")->Parse(), "api" => false];
     }
 }
 

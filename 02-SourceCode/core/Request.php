@@ -47,6 +47,7 @@ class Request
      */
     public static function CheckIfUrlFinishBySlash(string $url) : string
     {
+        // Check if the url finish by a slash
         if (substr($url, -1) != "/") 
             return $url."/";
         return $url;
@@ -103,11 +104,12 @@ class Request
                     return $route;
             }
         }
-
+        
         // Check if the dynamic url is set
         if ($dynamicRoute != null) 
             return $dynamicRoute;
-
+        
+        // Return the 404 route
         return Route::GetRouteByName("404");
     }
 }

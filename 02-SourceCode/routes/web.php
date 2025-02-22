@@ -33,7 +33,6 @@ class Web
         // Home page
         Route::Get('/', 
             ["controller" => HomeController::class, "function" => 'Home'],
-            'home', 'Home.php'
             )->Name('home');
 
         // Books page
@@ -65,7 +64,6 @@ class Web
 
         Route::Get('/language', 
             ["controller" => LanguageController::class, "function" => 'GetLanguage'],
-            '', ''
             )->Name('language');
 
         /**
@@ -83,7 +81,6 @@ class Web
 
         Route::Post('/account/disconnect', 
             ["function" => 'Disconnect'],
-            '', ''
             )->Name('disconnect');
 
         /**
@@ -92,12 +89,10 @@ class Web
         // Login
         Route::Post('/login', 
             ["function" => 'verifyLogin'],
-            '', ''
             )->Name('verifyLogin');
 
         Route::Post('/signin', 
             ["function" => 'VerifySignIn'],
-            '', ''
             )->Name('VerifySignIn');
 
         /**

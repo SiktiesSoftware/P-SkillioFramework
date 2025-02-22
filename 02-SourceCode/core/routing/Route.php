@@ -8,7 +8,8 @@ include_once __DIR__."/Verification.php";
  */
 class Route
 {
-    public string $link, $folder, $file, $name, $method;       // Link, folder, file and name of the route
+    public string $link, $method;                               // Link and method of the route
+    public string|null $folder, $file, $name;                   // Folder, file and name of the route
     public array $function;                                     // Function of the assigned controller
 
     public static array $routes;                                // Array of routes
@@ -24,7 +25,7 @@ class Route
      * @param file => File of the route
      * @param function => Function of the route
      */
-    private function __construct(string $link, string $folder, string $file, array $function)
+    private function __construct(string $link, string|null $folder, string|null $file, array $function)
     {
         $this->link = $link;
         $this->folder = $folder;
@@ -59,7 +60,7 @@ class Route
      * 
      * @return Route => New route
      */
-    public static function Get(string $link, array $function, string $file, string $folder) : Route
+    public static function Get(string $link, array $function, string|null $file = null, string|null $folder = null) : Route
     {
         // Set a new route and add them to the array
         $route = new Route("/{lang}".$link, $file, $folder, $function);
@@ -80,7 +81,7 @@ class Route
      * 
      * @return Route => New route
      */
-    public static function Post(string $link, array $function, string $file, string $folder) : Route
+    public static function Post(string $link, array $function, string|null $file = null, string|null $folder = null) : Route
     {
         // Set a new route and add them to the array
         $route = new Route("/{lang}".$link, $file, $folder, $function);

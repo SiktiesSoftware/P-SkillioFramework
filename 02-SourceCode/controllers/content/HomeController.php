@@ -19,12 +19,7 @@ class HomeController extends Controller
         $homeTranslations = Lang::GetTranslations("home", Request::$params["lang"]);
 
         // Get the view
-        $view = View::Get($this->folder, $this->file);
-
-        // Replace variables
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
+        $content = View::GetByName($this->pageName)->AddDatas(["translations" => $homeTranslations])->Parse();
 
         // Return the content of the page + variables set
         return ["content" => $content, "api" => false];
@@ -39,13 +34,8 @@ class HomeController extends Controller
     {
         // Return the content of a page ===> INCLUDE THE COMPONENTS INTO THE PAGE
         
-        // Get the view
-        $view = View::Get($this->folder, $this->file);
-
-        // Replace variables
-        ob_start();
-        eval('?>' . $view);
-        $content = ob_get_clean();
+        // Get the content
+        $content = View::GetByName($this->pageName)->Parse();
 
         // Return the content of the page + variables set
         return ["content" => $content, "api" => false];

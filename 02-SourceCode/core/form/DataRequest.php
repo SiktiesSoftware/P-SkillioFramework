@@ -12,9 +12,10 @@ class DataRequest
     /**
      * Class constructor
      */
-    function __construct()
+    function __construct(array $datas)
     {
-        
+        // Set the datas
+        $this->datas = $datas;
     }
 
     /**

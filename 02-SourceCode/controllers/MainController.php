@@ -1,7 +1,4 @@
 <?php
-
-use function PHPSTORM_META\type;
-
 include_once __DIR__."/../core/Controller.php";
 include_once __DIR__."/content/ErrorController.php";
 include_once __DIR__."/content/HomeController.php";
@@ -15,10 +12,6 @@ include_once __DIR__."/../core/Component.php";
  */
 class MainController
 {
-    protected string $views = "pages/views/";       // Folder of the views
-    protected string $folder;                       // Folder of the view
-    protected string $file;                         // View file
-
     /**
      * Dispatch datas into display page
      * 
@@ -29,7 +22,7 @@ class MainController
      * @param file => File of the route (Example.php)
      * @param name => Name of the route
      */
-    public function Dispatch(string $controller, string $callable, string $link, string $folder, string $file, string $name) : void 
+    public function Dispatch(string $controller, string $callable, string $link, string|null $folder, string|null $file, string|null $name) : void 
     {
         // Check if the controller is set or no
         if (!isset($controller)) 
@@ -45,7 +38,7 @@ class MainController
 
         // Get the controller and display page
         $currentController = $this->GetController($controller);
-        $this->viewBuild($currentController, $callable, $folder, $file, $link);
+        $this->viewBuild($currentController, $callable, $folder, $file, $link, $name);
     }
 
     /**
@@ -92,10 +85,10 @@ class MainController
      * @param folder => Folder of the view
      * @param file => File of the view
      */
-    private function viewBuild(mixed $currentController, string $callable, string $folder, string $file, string $link) : void
+    private function viewBuild(mixed $currentController, string $callable, string|null $folder, string|null $file, string $link, string|null $name) : void
     {
         // Get the content from the current controller
-        $display_result = Controller::Display($callable, $folder, $file, $currentController, $link);
+        $display_result = Controller::Display($callable, $folder, $file, $currentController, $link, $name);
 
         // Check if an error occured or not and display the page
         if ($currentController::class == ErrorController::class) 
