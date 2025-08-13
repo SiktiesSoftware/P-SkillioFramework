@@ -1,0 +1,17 @@
+{
+    "name": "skillio/mvc",
+    "autoload": {
+        "psr-4": {
+            "skillio\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Damien Loup"
+        }
+    ],
+    "require": {
+        "symfony/console": "^7.3",
+        "symfony/dotenv": "^7.3"
+    }
+}
